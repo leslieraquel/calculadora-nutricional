@@ -16,6 +16,7 @@ export class JsonService {
     getJson(cadena: string) {
         return this.http.get(cadena);
     }
+    
     postJson(cadena: string, archivo: any){
         return this.http.post(cadena,JSON.stringify(archivo));
     }

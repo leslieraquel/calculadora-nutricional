@@ -5,6 +5,16 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HeaderComponent } from './header/header.component';
+import { HttpClientModule } from'@angular/common/http';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import {MatExpansionModule} from '@angular/material/expansion';
+
+
+
+import {MatSelectModule} from '@angular/material/select';
+
+
 
 @NgModule({
   declarations: [
@@ -14,7 +24,13 @@ import { HeaderComponent } from './header/header.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatSelectModule,
+    HttpClientModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatExpansionModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]

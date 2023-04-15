@@ -1,0 +1,18 @@
+.tdtitle{
+     height: 50px; border: #ffff 11px solid; align-items: right;
+
+}
+.tdtotales{
+    background-color: aliceblue; height: 50px; border-left: #ffff 11px solid; align-items: right;
+
+}
+
+.trdet:hover td{
+    background:rgb(212, 209, 209);
+    cursor: pointer;
+}
+
+.highlight{
+    color: black;
+
+}
