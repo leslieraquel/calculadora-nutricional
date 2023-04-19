@@ -1,14 +1,18 @@
 .tdtitle{
-     height: 50px; border: #ffff 11px solid; align-items: right;
+     height: 50px; border: #ffff 1px solid; text-align: center;
 
 }
 .tdtotales{
-    background-color: aliceblue; height: 50px; border-left: #ffff 11px solid; align-items: right;
+    background-color: aliceblue; height: 70px; border-left: #ffff 2px solid;  text-align: center; font-weight: 800;
+
+}
+.tdtotal{
+    background-color: aliceblue; height: 70px; border-left: #ffff 11px solid;  text-align: right; font-weight: 800;
 
 }
 
 .trdet:hover td{
-    background:rgb(212, 209, 209);
+    background:rgb(241, 235, 235);
     cursor: pointer;
 }
 
@@ -16,3 +20,9 @@
     color: black;
 
 }
+
+.checks{
+    width: 21px;
+    height: 21px;
+    cursor: pointer;
+  }

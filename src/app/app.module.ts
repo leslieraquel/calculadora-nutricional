@@ -13,6 +13,8 @@ import {MatExpansionModule} from '@angular/material/expansion';
 
 
 import {MatSelectModule} from '@angular/material/select';
+import { NgxSpinnerModule } from "ngx-spinner";
+
 
 
 
@@ -29,7 +31,8 @@ import {MatSelectModule} from '@angular/material/select';
     HttpClientModule,
     MatFormFieldModule,
     MatInputModule,
-    MatExpansionModule
+    MatExpansionModule,
+    NgxSpinnerModule
 
   ],
   providers: [],

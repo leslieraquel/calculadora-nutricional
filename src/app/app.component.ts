@@ -1,6 +1,8 @@
 import { style } from '@angular/animations';
 import { Component } from '@angular/core';
 import { JsonService } from 'src/app/service/json.service';
+import { NgxSpinnerService } from "ngx-spinner";
+
 
 
 @Component({
@@ -11,16 +13,17 @@ import { JsonService } from 'src/app/service/json.service';
 export class AppComponent {
   title = 'calculadora-nutricional';
 
-  constructor(private  https:JsonService){
+  constructor(private  https:JsonService, private SpinnerService:NgxSpinnerService){
 
   }
-
 
   public matrizDieta=[{
     codalergia:0,
     nombrealergia: '',
     activo:false
   }];
+
+  colmddietas:string = ''; 
 
 
   public matrizProducto=[{
@@ -39,6 +42,7 @@ export class AppComponent {
   }];
 
   ngOnInit(): void {
+    this.detectedModeMovile();
     this.obtenerDieta();
     this.obtenerProductos();
 
@@ -47,7 +51,6 @@ export class AppComponent {
   obtenerDieta(){
 
     this.https.getJson("/calculadora-nutricional/api/calculadora-nutricional.php?op=1").subscribe((data:any)=>{
-      console.log(data);
       this.matrizDieta = data;
     });
 
@@ -55,10 +58,11 @@ export class AppComponent {
   }
 
   obtenerProductos(){
-
+    this.SpinnerService.show();
     this.https.getJson("/calculadora-nutricional/api/calculadora-nutricional.php?op=3").subscribe((data:any)=>{
-      console.log(data);
       this.matrizProducto = data;
+      this.SpinnerService.hide();
+
     });
 
 
@@ -66,18 +70,16 @@ export class AppComponent {
 
   selectDieta(event:any,j:number){
     this.matrizDieta[j].activo = event.target.checked;
-    console.log(event.target.value);
-    console.log(this.matrizDieta);
-    let datos ={
+    let datos = {
       matrizdieta:this.matrizDieta
     }
 
     if(this.validadorSeleccion()){
+      this.SpinnerService.show();
       this.https.postJson("/calculadora-nutricional/api/calculadora-nutricional.php?op=2",datos).subscribe((data:any)=>{
-        console.log(data);
         this.matrizProducto = data;
+        this.SpinnerService.hide();
       }); 
-
     }else{
       this.obtenerProductos();
     }
@@ -85,25 +87,18 @@ export class AppComponent {
 
   }
 
-  selectProducto(event:any,i:number,j:number){
-    console.log(event.target.checked);
+  selectProducto(event:any,i:number,j:number,codigoproducto:any){
     this.matrizProducto[i].detalleproducto[j].activo = event.target.checked;
-    let codicodigoproducto = this.matrizProducto[i].detalleproducto[j].codigoproducto
-    console.log(this.matrizProducto);
-    if(this.matrizProducto[i].detalleproducto[j].activo){
-      let tdinfo = document.querySelector(`tdinfo`) as HTMLParagraphElement;
-      console.log(tdinfo);
-      if(tdinfo){
-       tdinfo.style.color = "black";
-      }
+    let tdinfo = document.querySelectorAll(`.tdinfo${codigoproducto}`) as NodeListOf<HTMLParagraphElement>;
+    if(event.target.checked){
+      tdinfo.forEach(element => {
+          element.style.color = 'black';
+      });
     }else{
-      // let tdinfo = document.getElementById(`tdinfo`);
-      // if(tdinfo){
-      //   tdinfo.style.color = "#ffff"
-      // }
-
+      tdinfo.forEach(element => {
+        element.style.color = 'rgb(219, 214, 214)';
+      });
     }
-
   }
 
   sumarPorcion(){
@@ -191,6 +186,16 @@ export class AppComponent {
       }
     }
     return validador;
+  }
+
+  detectedModeMovile(){
+    let navegador = navigator.userAgent;
+    if (navigator.userAgent.match(/Android/i) || navigator.userAgent.match(/webOS/i) || navigator.userAgent.match(/iPhone/i) || navigator.userAgent.match(/iPad/i) || navigator.userAgent.match(/iPod/i) || navigator.userAgent.match(/BlackBerry/i) || navigator.userAgent.match(/Windows Phone/i)) {
+        this.colmddietas = '6';
+    } else {
+      this.colmddietas = '12';
+
+    }
   }
 
 
