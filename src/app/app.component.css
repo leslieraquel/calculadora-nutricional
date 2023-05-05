@@ -26,3 +26,7 @@
     height: 21px;
     cursor: pointer;
   }
+
+  .myCheckbox input:checked{
+    background-color: #c54817;
+  }

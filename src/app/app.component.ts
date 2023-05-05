@@ -2,7 +2,8 @@ import { style } from '@angular/animations';
 import { Component } from '@angular/core';
 import { JsonService } from 'src/app/service/json.service';
 import { NgxSpinnerService } from "ngx-spinner";
-
+import 'select2';
+import 'jquery';
 
 
 @Component({
@@ -12,7 +13,6 @@ import { NgxSpinnerService } from "ngx-spinner";
 })
 export class AppComponent {
   title = 'calculadora-nutricional';
-
   constructor(private  https:JsonService, private SpinnerService:NgxSpinnerService){
 
   }
@@ -24,6 +24,8 @@ export class AppComponent {
   }];
 
   colmddietas:string = ''; 
+  heigthImagen:string =''; 
+  whithImagen:string =''; 
 
 
   public matrizProducto=[{
@@ -37,7 +39,8 @@ export class AppComponent {
       fibradietetica:"",
       grasas:"",
       estado:"",
-      activo:false
+      activo:false,
+      linkimagen:false
     }],
   }];
 
@@ -45,10 +48,11 @@ export class AppComponent {
     this.detectedModeMovile();
     this.obtenerDieta();
     this.obtenerProductos();
+    // $('select').select2();
 
   }
 
-  obtenerDieta(){
+  obtenerDieta = () => {
 
     this.https.getJson("/calculadora-nutricional/api/calculadora-nutricional.php?op=1").subscribe((data:any)=>{
       this.matrizDieta = data;
@@ -57,15 +61,12 @@ export class AppComponent {
 
   }
 
-  obtenerProductos(){
+  obtenerProductos = () => {
     this.SpinnerService.show();
     this.https.getJson("/calculadora-nutricional/api/calculadora-nutricional.php?op=3").subscribe((data:any)=>{
       this.matrizProducto = data;
       this.SpinnerService.hide();
-
     });
-
-
   }
 
   selectDieta(event:any,j:number){
@@ -84,7 +85,6 @@ export class AppComponent {
       this.obtenerProductos();
     }
 
-
   }
 
   selectProducto(event:any,i:number,j:number,codigoproducto:any){
@@ -92,7 +92,7 @@ export class AppComponent {
     let tdinfo = document.querySelectorAll(`.tdinfo${codigoproducto}`) as NodeListOf<HTMLParagraphElement>;
     if(event.target.checked){
       tdinfo.forEach(element => {
-          element.style.color = 'black';
+        element.style.color = 'black';
       });
     }else{
       tdinfo.forEach(element => {
@@ -191,9 +191,12 @@ export class AppComponent {
   detectedModeMovile(){
     let navegador = navigator.userAgent;
     if (navigator.userAgent.match(/Android/i) || navigator.userAgent.match(/webOS/i) || navigator.userAgent.match(/iPhone/i) || navigator.userAgent.match(/iPad/i) || navigator.userAgent.match(/iPod/i) || navigator.userAgent.match(/BlackBerry/i) || navigator.userAgent.match(/Windows Phone/i)) {
-        this.colmddietas = '6';
+        this.heigthImagen = '50%';
+        this.whithImagen = '50%';
+        console.log("entra a movile")
     } else {
-      this.colmddietas = '12';
+      this.heigthImagen = '10%';
+      this.whithImagen = '10%';
 
     }
   }

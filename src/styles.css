@@ -1,7 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
 
 html, body { height: 100%;  }
-.mat-typography { margin: 0; font-family: Raleway, "Raleway", sans-serif; }
+.mat-typography { margin: 0; font-family:Van Condensed, "Van Condensed W01 Bold", sans-serif; }
+@import "~select2/dist/css/select2.min.css";
 
 *::selection {
     background: none;

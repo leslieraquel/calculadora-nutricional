@@ -1,14 +1,14 @@
 <div class="content" role="main">
   <div class="row">
     <div class="col-md-4">
-      <mat-expansion-panel  class="mb-4 mt-4 ">
-        <mat-expansion-panel-header>
+      <mat-expansion-panel  class="mb-4 mt-4 " style="background-color:#0D2024; color: white;">
+        <mat-expansion-panel-header style="background-color:#FA401D; color: #0D2024;" >
           <mat-panel-title>
               FILTRO DE DIETA O ALERGIA
           </mat-panel-title>
         </mat-expansion-panel-header>
-        <div class="form-check" *ngFor="let array of matrizDieta; let j = index">
-          <input class="form-check-input" [checked]="array.activo" type="checkbox" value="{{array.codalergia}}" (change)="selectDieta($event,j);" id="defaultCheck1" class="checks" ><label for="">&nbsp; &nbsp; {{array.nombrealergia}}</label>
+        <div class="form-check mt-3" *ngFor="let array of matrizDieta; let j = index">
+          <label class="myCheckbox"><input class="form-check-input" [checked]="array.activo" type="checkbox" value="{{array.codalergia}}" (change)="selectDieta($event,j);" id="defaultCheck1" class="checks" ></label><label for="">&nbsp; &nbsp; {{array.nombrealergia}}</label>
         </div>
     </mat-expansion-panel>
     </div>
@@ -80,24 +80,26 @@
           </tr>
         </tbody>
         <tbody *ngFor="let producto of matrizProducto; let i = index">
-          <tr>
-            <td colspan="7" style="background-color: rgb(180, 72, 72); color: white;"><b>{{producto['nombrecategoria']}}</b></td>
+          <tr style="height: 50px;">
+            <td colspan="7" style="background-color: #0D2024; color: #DE3C1E; align-items: center;"><b>{{producto['nombrecategoria']}}</b></td>
           </tr>
           <tr *ngFor="let productodet of producto['detalleproducto']  ; let j = index" class="trdet" >
-              <td style="width: 30%;">
-                <input style="cursor:pointer;" class="form-check-input" class="checks" [checked]="productodet.activo" type="checkbox" value="{{productodet.codigoproducto}}" (change)="selectProducto($event,i,j,productodet.codigoproducto)" id="defaultCheck1"> 
-                {{productodet['nombreproducto']}}
+              <td>
+                <div class="input-group" style="padding-top:3%;">
+                  <img [src]="productodet['linkimagen']" [ngStyle]="{'height':heigthImagen,'width':whithImagen}" class="img-responsive">
+                  <input style="cursor:pointer;" class="form-check-input" class="checks" [checked]="productodet.activo" type="checkbox" value="{{productodet.codigoproducto}}" (change)="selectProducto($event,i,j,productodet.codigoproducto)" id="defaultCheck1"> 
+                    {{productodet['nombreproducto']}}
+                </div>
               </td>
-              <td style="color:rgb(219, 214, 214)" class="tdinfo{{productodet.codigoproducto}}">{{productodet['porcion']}}</td>
-              <td style="color:rgb(219, 214, 214)" class="tdinfo{{productodet.codigoproducto}}">{{productodet['calorias']}}</td>
-              <td style="color:rgb(219, 214, 214)" class="tdinfo{{productodet.codigoproducto}}">{{productodet['carbohidratos']}}</td>
-              <td style="color:rgb(219, 214, 214)" class="tdinfo{{productodet.codigoproducto}}">{{productodet['proteina']}}</td>
-              <td style="color:rgb(219, 214, 214)" class="tdinfo{{productodet.codigoproducto}}">{{productodet['fibradietetica']}}</td>
-              <td style="color:rgb(219, 214, 214)" class="tdinfo{{productodet.codigoproducto}}">{{productodet['grasas']}}</td>
+              <td style="color:rgb(219, 214, 214);padding-top:2%;padding-bottom:1%;" class="tdinfo{{productodet.codigoproducto}}">{{productodet['porcion']}}</td>
+              <td style="color:rgb(219, 214, 214);padding-top:2%;padding-bottom:1%;" class="tdinfo{{productodet.codigoproducto}}">{{productodet['calorias']}}</td>
+              <td style="color:rgb(219, 214, 214);padding-top:2%;padding-bottom:1%;" class="tdinfo{{productodet.codigoproducto}}">{{productodet['carbohidratos']}}</td>
+              <td style="color:rgb(219, 214, 214);padding-top:2%;padding-bottom:1%;" class="tdinfo{{productodet.codigoproducto}}">{{productodet['proteina']}}</td>
+              <td style="color:rgb(219, 214, 214);padding-top:2%;padding-bottom:1%;" class="tdinfo{{productodet.codigoproducto}}">{{productodet['fibradietetica']}}</td>
+              <td style="color:rgb(219, 214, 214);padding-top:2%;padding-bottom:1%;" class="tdinfo{{productodet.codigoproducto}}">{{productodet['grasas']}}</td>
             </tr>
         </tbody>
       </table>
-
     </div>
   </div>
 </div>
